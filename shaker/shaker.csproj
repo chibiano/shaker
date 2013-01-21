@@ -90,6 +90,12 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="sounds\down.wav" />
+    <Content Include="sounds\left.wav" />
+    <Content Include="sounds\right.wav" />
+    <Content Include="sounds\Roland.wav" />
+    <Content Include="sounds\shaker.wav" />
+    <Content Include="sounds\up.wav" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

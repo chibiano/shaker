@@ -10,9 +10,13 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.Windows.Resources;
+using Microsoft.Xna.Framework;
 
 using Microsoft.Devices.Sensors;
-using Microsoft.Xna.Framework;
+
+using Microsoft.Xna.Framework.Audio;
+using System.IO;
 
 namespace shaker
 {
@@ -22,6 +26,8 @@ namespace shaker
         //Accelerometer accelerometer;
        // private Vector3 _lastreading;
         private ShakeDetect _shakeDetect;
+        Stream stream;
+        SoundEffect effect;
         // Constructor
         public MainPage()
         {
@@ -30,6 +36,8 @@ namespace shaker
             _shakeDetect = new ShakeDetect();
             _shakeDetect.ShakeEvent += new EventHandler<EventArgs>(_shakeDetect_ShakeEvent);
             _shakeDetect.Start();
+            stream= TitleContainer.OpenStream("sounds/shaker.wav");
+            
 /*
             if (!Accelerometer.IsSupported)
             {
@@ -46,8 +54,19 @@ namespace shaker
                 {
                     Storyboard shakeAnimation = Resources["ShakeAnimation"] as Storyboard;
                     shakeAnimation.Begin();
+                    
                 });
+                
+               /* stream = TitleContainer.OpenStream("sounds/shaker.wav");
+                effect = SoundEffect.FromStream(stream);
+                FrameworkDispatcher.Update();
+                effect.Play();*/
+            
+                    
         }
+
+        
+
 
         /*
         private void startButton_Click(object sender, RoutedEventArgs e)
