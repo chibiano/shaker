@@ -45,7 +45,7 @@ namespace shaker
 
 
             _shakeDetect = new ShakeDetect();
-            //_shakeDetect.ShakeEvent += new EventHandler<EventArgs>(_shakeDetect_ShakeEvent);
+            _shakeDetect.ShakeEvent += new EventHandler<EventArgs>(_shakeDetect_ShakeEvent);
             _shakeDetect.Start();
             stream = TitleContainer.OpenStream("sounds/shaker.wav");
 
@@ -78,7 +78,7 @@ namespace shaker
         private void MainPage_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
 
-            String file = "sounds/Roland.wav";
+            String file = "sounds/down.wav";
             while (TouchPanel.IsGestureAvailable)
             {
                 GestureSample gesture = TouchPanel.ReadGesture();
@@ -89,7 +89,9 @@ namespace shaker
                     stream = TitleContainer.OpenStream(file);
                     effect = SoundEffect.FromStream(stream);
                     FrameworkDispatcher.Update();
+                    _shakeDetect_ShakeEvent(sender, e);
                     effect.Play();
+                   
                 }
             }
         }
@@ -97,7 +99,7 @@ namespace shaker
 
 
 
-        /*
+        
         void _shakeDetect_ShakeEvent(object sender, EventArgs e)
         {
             this.Dispatcher.BeginInvoke(() =>
@@ -106,13 +108,9 @@ namespace shaker
                     shakeAnimation.Begin();
                     
                 });
-                */
-        /* stream = TitleContainer.OpenStream("sounds/shaker.wav");
-         effect = SoundEffect.FromStream(stream);
-         FrameworkDispatcher.Update();
-         effect.Play();
-         */
-        //}
+                
+         
+        }
 
 
 

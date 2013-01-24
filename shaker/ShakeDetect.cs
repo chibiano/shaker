@@ -24,8 +24,8 @@ namespace shaker
         private int _shakeRecordIndex = 0;
         private const double MinAccelMagnitude = 1.2;
         private const double MinAccelMagnitudeSquared = MinAccelMagnitude * MinAccelMagnitude;
-        private static readonly TimeSpan MinShakeTime = TimeSpan.FromMilliseconds(500);
-        private static readonly TimeSpan minTimeEachShake = TimeSpan.FromMilliseconds(20);
+        private static readonly TimeSpan MinShakeTime = TimeSpan.FromMilliseconds(50);
+        private static readonly TimeSpan minTimeEachShake = TimeSpan.FromMilliseconds(10);
         private DateTimeOffset lastShakeTime;
         Stream stream;
         SoundEffect effect;
