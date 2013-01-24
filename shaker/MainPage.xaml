@@ -57,8 +57,10 @@
     </Grid>
         -->
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentGrid" Grid.Row="1">
-            <Ellipse x:Name="ellipse" Fill="White"  Stroke="Black"/>
+        <Grid x:Name="ContentGrid" Grid.Row="1" ManipulationCompleted="MainPage_ManipulationCompleted">
+            
+            <!--<Ellipse x:Name="ellipse" Fill="White"  Stroke="Black"/> -->
+            <Image Source="image/eggs.png" Height="617" HorizontalAlignment="Center" Name="image1" Stretch="Fill" VerticalAlignment="Center" Width="480" />
         </Grid>
     </Grid>
 

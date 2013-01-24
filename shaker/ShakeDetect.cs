@@ -13,6 +13,9 @@ using Microsoft.Xna.Framework.Audio;
 using System.IO;
 using Microsoft.Xna.Framework;
 
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
+
 namespace shaker
 {
     public class ShakeDetect
@@ -63,11 +66,13 @@ namespace shaker
 
         public ShakeDetect()
             : this(2)
-        { 
+        {
+            
         }
 
         public ShakeDetect(int minShakes)
         {
+            TouchPanel.EnabledGestures = GestureType.Tap;
             _minimumShake = minShakes;
             _shakeRecordList = new ShakeRecord[minShakes];
             lastShakeTime = DateTimeOffset.Now;
@@ -77,6 +82,7 @@ namespace shaker
         {
             lock (SyncRoot)
             {
+
                 if (_accelerometer == null)
                 {
                     _accelerometer = new Accelerometer();
