@@ -13,10 +13,6 @@ using Microsoft.Phone.Controls;
 using System.Windows.Resources;
 using Microsoft.Xna.Framework;
 
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
-
-
 using Microsoft.Devices.Sensors;
 
 using Microsoft.Xna.Framework.Audio;
@@ -28,93 +24,48 @@ namespace shaker
     {
 
         //Accelerometer accelerometer;
-       // private Vector3 _lastreading;
+        // private Vector3 _lastreading;
         private ShakeDetect _shakeDetect;
         Stream stream;
         SoundEffect effect;
-       // String file = "sounds/Roland.wav";
-
         // Constructor
         public MainPage()
         {
             InitializeComponent();
 
-
-            
-           // this.ManipulationStarted += new EventHandler<ManipulationStartedEventArgs>(MainPage_ManipulationStarted);
-           
-            
             _shakeDetect = new ShakeDetect();
-            //_shakeDetect.ShakeEvent += new EventHandler<EventArgs>(_shakeDetect_ShakeEvent);
+            _shakeDetect.ShakeEvent += new EventHandler<EventArgs>(_shakeDetect_ShakeEvent);
             _shakeDetect.Start();
-            stream= TitleContainer.OpenStream("sounds/shaker.wav");
-            
-            TouchPanel.EnabledGestures = GestureType.Tap;
-            ManipulationCompleted += new EventHandler<ManipulationCompletedEventArgs>(MainPage_ManipulationCompleted);
+            stream = TitleContainer.OpenStream("sounds/shaker.wav");
 
-
-            
-
-            
-            
-            
-
-
-
-           
-            
-
-/*
-            if (!Accelerometer.IsSupported)
-            {
-                statusTextBlock.Text = "device does not support accelerometer";
-                startButton.IsEnabled = false;
-                stopButton.IsEnabled = false;
-            }
-*/
+            /*
+                        if (!Accelerometer.IsSupported)
+                        {
+                            statusTextBlock.Text = "device does not support accelerometer";
+                            startButton.IsEnabled = false;
+                            stopButton.IsEnabled = false;
+                        }
+            */
         }
 
-
-        private void MainPage_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
-        {
-            
-            String file = "sounds/Roland.wav";
-            while (TouchPanel.IsGestureAvailable)
-            {
-                GestureSample gesture = TouchPanel.ReadGesture();
-
-                if (gesture.GestureType == GestureType.Tap)
-                {
-                    //Do something
-                    stream = TitleContainer.OpenStream(file);
-                    effect = SoundEffect.FromStream(stream);
-                    FrameworkDispatcher.Update();
-                    effect.Play();
-                }
-            }
-        }
-
-       
-
-        
-        /*
         void _shakeDetect_ShakeEvent(object sender, EventArgs e)
         {
             this.Dispatcher.BeginInvoke(() =>
-                {
-                    Storyboard shakeAnimation = Resources["ShakeAnimation"] as Storyboard;
-                    shakeAnimation.Begin();
-                    
-                });
-                */
-               /* stream = TitleContainer.OpenStream("sounds/shaker.wav");
-                effect = SoundEffect.FromStream(stream);
-                FrameworkDispatcher.Update();
-                effect.Play();
-                */   
-        //}
-   
-       
+            {
+                Storyboard shakeAnimation = Resources["ShakeAnimation"] as Storyboard;
+                shakeAnimation.Begin();
+
+            });
+
+            /* stream = TitleContainer.OpenStream("sounds/shaker.wav");
+             effect = SoundEffect.FromStream(stream);
+             FrameworkDispatcher.Update();
+             effect.Play();*/
+
+
+        }
+
+
 
 
         /*

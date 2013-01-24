@@ -12,7 +12,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-    
+
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="ShakeAnimation">
             <ColorAnimation Duration="0:0:0.9" From="#FFFF0000" To="#FFFFFFFF" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipse"/>
@@ -39,8 +39,8 @@
             <TextBlock x:Name="ApplicationTitle" Text="SHAKE DETECTOR" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="shake it!" Margin="-3,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
-        
-              
+
+
         <!--ContentPanel - place additional content here-->
         <!--
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -58,9 +58,9 @@
         -->
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentGrid" Grid.Row="1" ManipulationCompleted="MainPage_ManipulationCompleted">
-            
+
             <!--<Ellipse x:Name="ellipse" Fill="White"  Stroke="Black"/> -->
-            <Image Source="image/eggs.png" Height="617" HorizontalAlignment="Center" Name="image1" Stretch="Fill" VerticalAlignment="Center" Width="480" />
+            <Image Source="images/eggs.png" Height="617" HorizontalAlignment="Center" Name="image1" Stretch="Fill" VerticalAlignment="Center" Width="480" />
         </Grid>
     </Grid>
 

@@ -13,9 +13,6 @@ using Microsoft.Xna.Framework.Audio;
 using System.IO;
 using Microsoft.Xna.Framework;
 
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
-
 namespace shaker
 {
     public class ShakeDetect
@@ -32,7 +29,7 @@ namespace shaker
         private DateTimeOffset lastShakeTime;
         Stream stream;
         SoundEffect effect;
-        
+
 
         public event EventHandler<EventArgs> ShakeEvent = null;
 
@@ -40,7 +37,7 @@ namespace shaker
         {
             if (ShakeEvent != null)
                 ShakeEvent(this, new EventArgs());
-            
+
         }
 
 
@@ -67,12 +64,10 @@ namespace shaker
         public ShakeDetect()
             : this(2)
         {
-            
         }
 
         public ShakeDetect(int minShakes)
         {
-            TouchPanel.EnabledGestures = GestureType.Tap;
             _minimumShake = minShakes;
             _shakeRecordList = new ShakeRecord[minShakes];
             lastShakeTime = DateTimeOffset.Now;
@@ -82,7 +77,6 @@ namespace shaker
         {
             lock (SyncRoot)
             {
-
                 if (_accelerometer == null)
                 {
                     _accelerometer = new Accelerometer();
@@ -134,57 +128,57 @@ namespace shaker
             if ((_shakeRecordList[endIndex].EventTime.Subtract(_shakeRecordList[startIndex].EventTime)) <= MinShakeTime)
             {
                 lastShakeTime = DateTimeOffset.Now;
-                String file="sounds/shaker.wav";
-             
-                    if (direction== Direction.North)
-                        file=("sounds/up.wav");
-                        
-                    else if (direction== Direction.NorthEast)
-                       file=("sounds/up.wav");
-                        
-                    else if (direction==  Direction.East)
-                       file=("sounds/right.wav");
-                       
-                    else if (direction==  Direction.SouthEast)
-                        file=("sounds/right.wav");
-                       
-                    else if (direction==  Direction.South)
-                        file=("sounds/down.wav");
-                        
-                    else if (direction==  Direction.SouthWest)
-                        file=("sounds/down.wav");
-                        
-                    else if (direction==  Direction.West)
-                        file=("sounds/left.wav");
-                       
-                    else if (direction==  Direction.NorthWest)
-                       file=("sounds/left.wav");
-                        
-                     
-                        
+                String file = "sounds/shaker.wav";
 
-                
-                 stream = TitleContainer.OpenStream(file);
-                 
+                if (direction == Direction.North)
+                    file = ("sounds/up.wav");
+
+                else if (direction == Direction.NorthEast)
+                    file = ("sounds/up.wav");
+
+                else if (direction == Direction.East)
+                    file = ("sounds/right.wav");
+
+                else if (direction == Direction.SouthEast)
+                    file = ("sounds/right.wav");
+
+                else if (direction == Direction.South)
+                    file = ("sounds/down.wav");
+
+                else if (direction == Direction.SouthWest)
+                    file = ("sounds/down.wav");
+
+                else if (direction == Direction.West)
+                    file = ("sounds/left.wav");
+
+                else if (direction == Direction.NorthWest)
+                    file = ("sounds/left.wav");
+
+
+
+
+
+                stream = TitleContainer.OpenStream(file);
+
 
 
                 effect = SoundEffect.FromStream(stream);
-                
+
                 FrameworkDispatcher.Update();
-                effect.Play();               
-                
-                
+                effect.Play();
+
+
                 OnShakeEvent();
             }
         }
 
         void _accelerometer_ReadingChanged(object sender, AccelerometerReadingEventArgs e)
         {
-            DateTimeOffset eventTime=e.Timestamp;
+            DateTimeOffset eventTime = e.Timestamp;
 
-            TimeSpan timeDiff = eventTime-lastShakeTime;
+            TimeSpan timeDiff = eventTime - lastShakeTime;
 
-            if (timeDiff> MinShakeTime)
+            if (timeDiff > MinShakeTime)
             {
                 if (e.X * e.X + e.Y * e.Y > MinAccelMagnitudeSquared)
                 {
