@@ -24,20 +24,21 @@ namespace shaker
         private int _shakeRecordIndex = 0;
         private const double MinAccelMagnitude = 1.2;
         private const double MinAccelMagnitudeSquared = MinAccelMagnitude * MinAccelMagnitude;
-        private static readonly TimeSpan MinShakeTime = TimeSpan.FromMilliseconds(50);
-        private static readonly TimeSpan minTimeEachShake = TimeSpan.FromMilliseconds(10);
+        private static readonly TimeSpan MinShakeTime = TimeSpan.FromMilliseconds(500);
+        private static readonly TimeSpan minTimeEachShake = TimeSpan.FromMilliseconds(20);
         private DateTimeOffset lastShakeTime;
         Stream stream;
         SoundEffect effect;
-        
+
 
         public event EventHandler<EventArgs> ShakeEvent = null;
+        public Object a;
 
         protected void OnShakeEvent()
         {
             if (ShakeEvent != null)
                 ShakeEvent(this, new EventArgs());
-            
+
         }
 
 
@@ -63,7 +64,7 @@ namespace shaker
 
         public ShakeDetect()
             : this(2)
-        { 
+        {
         }
 
         public ShakeDetect(int minShakes)
@@ -101,6 +102,7 @@ namespace shaker
 
         Direction DegreesToDirection(double direction)
         {
+            System.Diagnostics.Debug.WriteLine("direction degree: " + direction);
             if ((direction >= 337.5) || (direction <= 22.5))
                 return Direction.North;
             if ((direction <= 67.5))
@@ -128,65 +130,73 @@ namespace shaker
             if ((_shakeRecordList[endIndex].EventTime.Subtract(_shakeRecordList[startIndex].EventTime)) <= MinShakeTime)
             {
                 lastShakeTime = DateTimeOffset.Now;
-                String file="sounds/shaker.wav";
-             
-                    if (direction== Direction.North)
-                        file=("sounds/up.wav");
-                        
-                    else if (direction== Direction.NorthEast)
-                       file=("sounds/up.wav");
-                        
-                    else if (direction==  Direction.East)
-                       file=("sounds/right.wav");
-                       
-                    else if (direction==  Direction.SouthEast)
-                        file=("sounds/right.wav");
-                       
-                    else if (direction==  Direction.South)
-                        file=("sounds/down.wav");
-                        
-                    else if (direction==  Direction.SouthWest)
-                        file=("sounds/down.wav");
-                        
-                    else if (direction==  Direction.West)
-                        file=("sounds/left.wav");
-                       
-                    else if (direction==  Direction.NorthWest)
-                       file=("sounds/left.wav");
-                        
-                     
-                        
+                String file = "sounds/shaker.wav";
 
-                
-                 stream = TitleContainer.OpenStream(file);
-                 
+                if (direction == Direction.North)
+                    file = ("sounds/up.wav");
+
+                else if (direction == Direction.NorthEast)
+                    file = ("sounds/up.wav");
+
+                else if (direction == Direction.East)
+                    file = ("sounds/right.wav");
+
+                else if (direction == Direction.SouthEast)
+                    file = ("sounds/right.wav");
+
+                else if (direction == Direction.South)
+                    file = ("sounds/down.wav");
+
+                else if (direction == Direction.SouthWest)
+                    file = ("sounds/down.wav");
+
+                else if (direction == Direction.West)
+                    file = ("sounds/left.wav");
+
+                else if (direction == Direction.NorthWest)
+                    file = ("sounds/left.wav");
+
+
+
+
+
+                stream = TitleContainer.OpenStream(file);
+
 
 
                 effect = SoundEffect.FromStream(stream);
-                
+
                 FrameworkDispatcher.Update();
-                effect.Play();               
+                effect.Play();
+
+                System.Diagnostics.Debug.WriteLine("direction: " + direction);
                 
                 
+
                 OnShakeEvent();
             }
         }
 
         void _accelerometer_ReadingChanged(object sender, AccelerometerReadingEventArgs e)
         {
-            DateTimeOffset eventTime=e.Timestamp;
+            DateTimeOffset eventTime = e.Timestamp;
 
-            TimeSpan timeDiff = eventTime-lastShakeTime;
 
+            TimeSpan timeDiff = eventTime - lastShakeTime;
+
+            
             if (timeDiff> MinShakeTime)
+
             {
-                if (e.X * e.X + e.Y * e.Y > MinAccelMagnitudeSquared)
+               
+                if ((e.X * e.X + e.Y * e.Y )> MinAccelMagnitudeSquared)
                 {
-                    double degrees = 180.0 * Math.Atan2(e.Y, e.X) / Math.PI;
+                    System.Diagnostics.Debug.WriteLine("direction x y: " + e.X + ", " + e.Y);
+                    double degrees =( 180.0 * Math.Atan2(e.Y, e.X) / Math.PI);
                     Direction direction = DegreesToDirection(degrees);
 
-                    // if ((direction & _shakeRecordList[_shakeRecordIndex].ShakeDirection) != Direction.None)
-                    //   return;
+                     //if ((direction & _shakeRecordList[_shakeRecordIndex].ShakeDirection) != Direction.None)
+                      // return;
                     ShakeRecord record = new ShakeRecord();
                     record.EventTime = DateTime.Now;
                     record.ShakeDirection = direction;

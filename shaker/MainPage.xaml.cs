@@ -24,10 +24,11 @@ namespace shaker
     {
 
         //Accelerometer accelerometer;
-       // private Vector3 _lastreading;
+        // private Vector3 _lastreading;
         private ShakeDetect _shakeDetect;
         Stream stream;
         SoundEffect effect;
+        
         // Constructor
         public MainPage()
         {
@@ -35,7 +36,24 @@ namespace shaker
 
             _shakeDetect = new ShakeDetect();
             _shakeDetect.ShakeEvent += new EventHandler<EventArgs>(_shakeDetect_ShakeEvent);
+            
+            
             _shakeDetect.Start();
+
+            stream = TitleContainer.OpenStream("sounds/shaker.wav");
+
+            /*
+                        if (!Accelerometer.IsSupported)
+                        {
+                            statusTextBlock.Text = "device does not support accelerometer";
+                            startButton.IsEnabled = false;
+                            stopButton.IsEnabled = false;
+                        }
+            */
+
+            System.Diagnostics.Debug.WriteLine("started");
+            
+
             stream= TitleContainer.OpenStream("sounds/shaker.wav");
             
 /*
@@ -46,26 +64,28 @@ namespace shaker
                 stopButton.IsEnabled = false;
             }
 */
+
         }
 
         void _shakeDetect_ShakeEvent(object sender, EventArgs e)
         {
             this.Dispatcher.BeginInvoke(() =>
-                {
-                    Storyboard shakeAnimation = Resources["ShakeAnimation"] as Storyboard;
-                    shakeAnimation.Begin();
-                    
-                });
-                
-               /* stream = TitleContainer.OpenStream("sounds/shaker.wav");
-                effect = SoundEffect.FromStream(stream);
-                FrameworkDispatcher.Update();
-                effect.Play();*/
-            
-                    
-        }
+            {
+                Storyboard shakeAnimation = Resources["ShakeAnimation"] as Storyboard;
+                shakeAnimation.Begin();
 
+            });
+
+            /* stream = TitleContainer.OpenStream("sounds/shaker.wav");
+             effect = SoundEffect.FromStream(stream);
+             FrameworkDispatcher.Update();
+             effect.Play();*/
+
+
+        }
         
+
+
 
 
         /*
