@@ -24,14 +24,15 @@ namespace shaker
         private int _shakeRecordIndex = 0;
         private const double MinAccelMagnitude = 1.2;
         private const double MinAccelMagnitudeSquared = MinAccelMagnitude * MinAccelMagnitude;
-        private static readonly TimeSpan MinShakeTime = TimeSpan.FromMilliseconds(50);
-        private static readonly TimeSpan minTimeEachShake = TimeSpan.FromMilliseconds(10);
+        private static readonly TimeSpan MinShakeTime = TimeSpan.FromMilliseconds(500);
+        private static readonly TimeSpan minTimeEachShake = TimeSpan.FromMilliseconds(20);
         private DateTimeOffset lastShakeTime;
         Stream stream;
         SoundEffect effect;
 
 
         public event EventHandler<EventArgs> ShakeEvent = null;
+        public Object a;
 
         protected void OnShakeEvent()
         {
@@ -101,6 +102,7 @@ namespace shaker
 
         Direction DegreesToDirection(double direction)
         {
+            System.Diagnostics.Debug.WriteLine("direction degree: " + direction);
             if ((direction >= 337.5) || (direction <= 22.5))
                 return Direction.North;
             if ((direction <= 67.5))
@@ -167,6 +169,9 @@ namespace shaker
                 FrameworkDispatcher.Update();
                 effect.Play();
 
+                System.Diagnostics.Debug.WriteLine("direction: " + direction);
+                
+                
 
                 OnShakeEvent();
             }
@@ -176,17 +181,22 @@ namespace shaker
         {
             DateTimeOffset eventTime = e.Timestamp;
 
+
             TimeSpan timeDiff = eventTime - lastShakeTime;
 
-            if (timeDiff > MinShakeTime)
+            
+            if (timeDiff> MinShakeTime)
+
             {
-                if (e.X * e.X + e.Y * e.Y > MinAccelMagnitudeSquared)
+               
+                if ((e.X * e.X + e.Y * e.Y )> MinAccelMagnitudeSquared)
                 {
-                    double degrees = 180.0 * Math.Atan2(e.Y, e.X) / Math.PI;
+                    System.Diagnostics.Debug.WriteLine("direction x y: " + e.X + ", " + e.Y);
+                    double degrees =( 180.0 * Math.Atan2(e.Y, e.X) / Math.PI);
                     Direction direction = DegreesToDirection(degrees);
 
-                    // if ((direction & _shakeRecordList[_shakeRecordIndex].ShakeDirection) != Direction.None)
-                    //   return;
+                     //if ((direction & _shakeRecordList[_shakeRecordIndex].ShakeDirection) != Direction.None)
+                      // return;
                     ShakeRecord record = new ShakeRecord();
                     record.EventTime = DateTime.Now;
                     record.ShakeDirection = direction;
