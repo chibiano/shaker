@@ -15,7 +15,7 @@
 
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="ShakeAnimation">
-            <ColorAnimation Duration="0:0:0.9" From="#FFFF0000" To="#FFFFFFFF" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipse"/>
+            <ColorAnimation Duration="0:0:0.9" From="DarkRed" To="Transparent" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipse"/>
         </Storyboard>
     </phone:PhoneApplicationPage.Resources>
 
@@ -58,9 +58,13 @@
         -->
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentGrid" Grid.Row="1" ManipulationCompleted="MainPage_ManipulationCompleted">
-
-            <!--<Ellipse x:Name="ellipse" Fill="White"  Stroke="Black"/> -->
-            <Image Source="images/eggs.png" Height="617" HorizontalAlignment="Center" Name="image1" Stretch="Fill" VerticalAlignment="Center" Width="480" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="234*" />
+                <ColumnDefinition Width="246*" />
+            </Grid.ColumnDefinitions>
+            
+            <Image Source="images/eggs.png" Height="617" HorizontalAlignment="Center" Name="image1" Stretch="Fill" VerticalAlignment="Center" Width="480" Grid.ColumnSpan="2" />
+            <Ellipse x:Name="ellipse" Fill="Transparent"  Stroke="Transparent" Grid.ColumnSpan="2" Margin="85,116,84,114" />
         </Grid>
     </Grid>
 
