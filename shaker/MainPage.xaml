@@ -15,7 +15,12 @@
 
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="ShakeAnimation">
+            <DoubleAnimation Storyboard.TargetName="image1"
+                         Storyboard.TargetProperty="Opacity" From="0.0"
+                         To="1.0" Duration="0:0:1" />
+            <!--
             <ColorAnimation Duration="0:0:0.9" From="DarkRed" To="Transparent" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipse"/>
+            -->
         </Storyboard>
     </phone:PhoneApplicationPage.Resources>
 
@@ -36,8 +41,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="24,24,0,12">
-            <TextBlock x:Name="ApplicationTitle" Text="SHAKE DETECTOR" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="shake it!" Margin="-3,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="Bop It" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Shake it!" Margin="-3,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
 
@@ -57,14 +62,16 @@
     </Grid>
         -->
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentGrid" Grid.Row="1" ManipulationCompleted="MainPage_ManipulationCompleted">
+        <Grid x:Name="ContentGrid" Grid.Row="1" ManipulationCompleted="MainPage_ManipulationCompleted" ShowGridLines="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="234*" />
                 <ColumnDefinition Width="246*" />
             </Grid.ColumnDefinitions>
-            
+            <Image Source="images/fade.png" Name="fade_layer" HorizontalAlignment="Center" Stretch="Fill" VerticalAlignment="Center" Width="480" Height="617" Grid.ColumnSpan="2" />
             <Image Source="images/eggs.png" Height="617" HorizontalAlignment="Center" Name="image1" Stretch="Fill" VerticalAlignment="Center" Width="480" Grid.ColumnSpan="2" />
+            <!--
             <Ellipse x:Name="ellipse" Fill="Transparent"  Stroke="Transparent" Grid.ColumnSpan="2" Margin="85,116,84,114" />
+            -->
         </Grid>
     </Grid>
 
