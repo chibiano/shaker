@@ -93,6 +93,18 @@
     </Content>
     <Resource Include="images\eggs.png" />
     <Resource Include="images\fade.png" />
+    <Content Include="icons\app62.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\device173.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\device99.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\market173.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="sounds\down.wav" />
     <Content Include="sounds\left.wav" />
     <Content Include="sounds\right.wav" />
