@@ -191,7 +191,7 @@ namespace shaker
                
                 if ((e.X * e.X + e.Y * e.Y )> MinAccelMagnitudeSquared)
                 {
-                    System.Diagnostics.Debug.WriteLine("direction x y: " + e.X + ", " + e.Y);
+                   // System.Diagnostics.Debug.WriteLine("direction x y: " + e.X + ", " + e.Y);
                     double degrees =( 180.0 * Math.Atan2(e.Y, e.X) / Math.PI);
                     Direction direction = DegreesToDirection(degrees);
 
