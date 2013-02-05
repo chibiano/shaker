@@ -11,7 +11,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" xmlns:my="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI">
 
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="ShakeAnimation">
@@ -40,9 +40,9 @@
         -->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="24,24,0,12">
-            <TextBlock x:Name="ApplicationTitle" Text="Bop It" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Shake it!" Margin="-3,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Margin="12,86,12,568" Grid.RowSpan="2">
+            <TextBlock x:Name="ApplicationTitle" Text="Tap it!" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Shake!" Margin="-3,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
 
@@ -73,6 +73,7 @@
             <Ellipse x:Name="ellipse" Fill="Transparent"  Stroke="Transparent" Grid.ColumnSpan="2" Margin="85,116,84,114" />
             -->
         </Grid>
+        <my:AdControl AdUnitId="10058482" ApplicationId="7ac5602d-8612-4c5b-bc8a-9aad920e454e" Height="80" Name="adControl1" Width="480"  />
     </Grid>
 
 

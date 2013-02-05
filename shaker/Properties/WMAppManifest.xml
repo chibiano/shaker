@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{58a9230e-43fe-49ee-ac7b-e2a28121a911}" Title="shaker" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="shaker author" Description="Sample description" Publisher="shaker">
+  <App xmlns="" ProductID="{58a9230e-43fe-49ee-ac7b-e2a28121a911}" Title="Shaker" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="shaker author" Description="Sample description" Publisher="shaker">
     <IconPath IsRelative="true" IsResource="false">icons\app62.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />

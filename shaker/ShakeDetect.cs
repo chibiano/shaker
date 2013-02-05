@@ -106,7 +106,7 @@ namespace shaker
             { 
                 direction += 360; 
             }
-            System.Diagnostics.Debug.WriteLine("direction degree: " + direction);
+            
             if ((direction >= 337.5) || (direction <= 22.5))
                 return Direction.North;
             if ((direction <= 67.5))
@@ -173,7 +173,7 @@ namespace shaker
                 FrameworkDispatcher.Update();
                 effect.Play();
 
-                System.Diagnostics.Debug.WriteLine("direction: " + direction);
+                
                 
                 
 
@@ -196,7 +196,7 @@ namespace shaker
                 if ((e.X * e.X + e.Y * e.Y )> MinAccelMagnitudeSquared)
                 {
 
-                    System.Diagnostics.Debug.WriteLine("direction x y: " + e.X + ", " + e.Y);
+                    
                     double degrees =( 180.0 * Math.Atan2(e.X, e.Y) / Math.PI);
 
                     Direction direction = DegreesToDirection(degrees);
