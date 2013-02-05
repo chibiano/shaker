@@ -22,7 +22,7 @@ namespace shaker
         private int _minimumShake;
         ShakeRecord[] _shakeRecordList;
         private int _shakeRecordIndex = 0;
-        private const double MinAccelMagnitude = 1.2;
+        private const double MinAccelMagnitude = 1.3;
         private const double MinAccelMagnitudeSquared = MinAccelMagnitude * MinAccelMagnitude;
         private static readonly TimeSpan MinShakeTime = TimeSpan.FromMilliseconds(50);
         private static readonly TimeSpan minTimeEachShake = TimeSpan.FromMilliseconds(10);
@@ -102,6 +102,10 @@ namespace shaker
 
         Direction DegreesToDirection(double direction)
         {
+            if (direction < 0)
+            { 
+                direction += 360; 
+            }
             System.Diagnostics.Debug.WriteLine("direction degree: " + direction);
             if ((direction >= 337.5) || (direction <= 22.5))
                 return Direction.North;
@@ -191,8 +195,10 @@ namespace shaker
                
                 if ((e.X * e.X + e.Y * e.Y )> MinAccelMagnitudeSquared)
                 {
-                   // System.Diagnostics.Debug.WriteLine("direction x y: " + e.X + ", " + e.Y);
-                    double degrees =( 180.0 * Math.Atan2(e.Y, e.X) / Math.PI);
+
+                    System.Diagnostics.Debug.WriteLine("direction x y: " + e.X + ", " + e.Y);
+                    double degrees =( 180.0 * Math.Atan2(e.X, e.Y) / Math.PI);
+
                     Direction direction = DegreesToDirection(degrees);
 
                      //if ((direction & _shakeRecordList[_shakeRecordIndex].ShakeDirection) != Direction.None)
